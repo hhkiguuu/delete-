@@ -9,31 +9,43 @@ const client = new Client({
 });
 
 client.once("ready", () => {
-  console.log(`${client.user.tag} is online`);
+  console.log(`Logged in as ${client.user.tag}`);
 });
 
 client.on("messageCreate", async (message) => {
+  if (!message.guild) return;
   if (message.author.bot) return;
+
   if (message.content !== "!deleteroles") return;
 
-  if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator))
-    return message.reply("Administrator only.");
+  // check admin permission
+  if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+    return message.reply("You need Administrator permission.");
+  }
+
+  const botMember = message.guild.members.me;
 
   let deleted = 0;
 
-  for (const role of message.guild.roles.cache.values()) {
-    if (
-      role.id === message.guild.id ||
-      role.position >= message.guild.members.me.roles.highest.position
-    ) continue;
+  const roles = message.guild.roles.cache
+    .sort((a, b) => b.position - a.position);
 
+  for (const role of roles.values()) {
     try {
-      await role.delete("Mass role deletion");
+      // skip @everyone
+      if (role.id === message.guild.id) continue;
+
+      // skip roles higher or equal to bot
+      if (role.position >= botMember.roles.highest.position) continue;
+
+      await role.delete("Mass role delete command");
       deleted++;
-    } catch {}
+    } catch (err) {
+      console.log(`Failed to delete role ${role.name}`);
+    }
   }
 
-  message.reply(`Deleted ${deleted} roles.`);
+  message.channel.send(`Deleted **${deleted} roles**.`);
 });
 
 client.login(process.env.TOKEN);
