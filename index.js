@@ -6,7 +6,7 @@ import os
 import re
 import time
 
-TOKEN = os.environ.get("MTUxOTc1Mjk0ODQwODY1MjAwOA.GPb4Kr.8AGwHuXoqB7Ck_E6PN6viEVw__so04UgIVHhpw")
+TOKEN = os.environ.get("MTUxOTg5NzU4MzQzMzI4OTgxOA.GxY5sP.lrd-0-CP7snSrpLmfQBxIV-j25dyhGxV8X9lnU.GPb4Kr.8AGwHuXoqB7Ck_E6PN6viEVw__so04UgIVHhpw")
 
 # 🔧 Hardcode your fake/troll user ID here, or set it live with !rig
 RIGGED_WINNER_ID = 1519064660501074133
