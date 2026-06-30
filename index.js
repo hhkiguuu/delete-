@@ -7,8 +7,15 @@ const {
   SlashCommandBuilder,
 } = require('discord.js');
 
-const TOKEN = process.env.DISCORD_TOKEN || 'MTUxOTg5NzU4MzQzMzI4OTgxOA.GHalCi.xJAM-62QLKAe2kdcbcO2l5BR0wpudwnPm6zKM0';
-const CLIENT_ID = process.env.CLIENT_ID || '1519752948408652008';
+const TOKEN = process.env.DISCORD_TOKEN;
+const CLIENT_ID = process.env.CLIENT_ID;
+
+if (!TOKEN || !CLIENT_ID) {
+  console.error(
+    'Missing required environment variables. Set DISCORD_TOKEN and CLIENT_ID (Railway: Variables tab) before starting the bot.'
+  );
+  process.exit(1);
+}
 
 // 🔧 Hardcode your fake/troll user ID here, or set it live with /rig
 let RIGGED_WINNER_ID = '1519064660501074133';
