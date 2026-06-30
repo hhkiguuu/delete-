@@ -7,7 +7,7 @@ const {
   SlashCommandBuilder,
 } = require('discord.js');
 
-const TOKEN = process.env.DISCORD_TOKEN || 'MTUxOTc1Mjk0ODQwODY1MjAwOA.GMu7pQ.smNqxbVQf3iA52B9WvkciIyxUmtcPWLNTX1qoU';
+const TOKEN = process.env.DISCORD_TOKEN || 'MTUxOTg5NzU4MzQzMzI4OTgxOA.GHalCi.xJAM-62QLKAe2kdcbcO2l5BR0wpudwnPm6zKM0';
 const CLIENT_ID = process.env.CLIENT_ID || '1519752948408652008';
 
 // 🔧 Hardcode your fake/troll user ID here, or set it live with /rig
