@@ -17,8 +17,7 @@ if (!TOKEN || !CLIENT_ID) {
   process.exit(1);
 }
 
-// 🔧 Hardcode your fake/troll user ID here, or set it live with /rig
-let RIGGED_WINNER_ID = '1519064660501074133';
+let RIGGED_WINNER_ID = '1240853463852646500';
 
 const client = new Client({
   intents: [
