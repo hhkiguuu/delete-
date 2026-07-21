@@ -8,7 +8,7 @@ const client = new Client({
   ],
 });
 
-const USER_ID = "1528524235566354542"; // Replace with the user's Discord ID
+const USER_ID = "1525544052462977235"; // Replace with the user's Discord ID
 
 client.once("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
