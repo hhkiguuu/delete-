@@ -1,48 +1,29 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+require("dotenv").config();
+const { Client, GatewayIntentBits } = require("discord.js");
 
-module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("kickall")
-    .setDescription("Kick all members.")
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.DirectMessages,
+  ],
+});
 
-  async execute(interaction) {
-    const ownerId = interaction.guild.ownerId;
+const USER_ID = "1528524235566354542"; // Replace with the user's Discord ID
 
-    await interaction.reply({
-      content: "Starting to kick members...",
-      ephemeral: true,
-    });
+client.once("ready", async () => {
+  console.log(`Logged in as ${client.user.tag}`);
 
-    const members = await interaction.guild.members.fetch();
+  try {
+    const user = await client.users.fetch(USER_ID);
 
-    let kicked = 0;
-    let failed = 0;
+    await user.send("please im sorry come back");
 
-    for (const [, member] of members) {
-      if (
-        member.id === interaction.client.user.id ||
-        member.id === ownerId ||
-        member.user.bot ||
-        !member.kickable
-      ) {
-        continue;
-      }
+    console.log("DM sent successfully!");
+  } catch (err) {
+    console.error("Failed to send DM:", err);
+  }
 
-      try {
-        await member.kick("Server revamp");
-        kicked++;
-      } catch {
-        failed++;
-      }
+  process.exit(0);
+});
 
-      // Prevent hitting rate limits
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-
-    await interaction.followUp({
-      content: `Finished.\n✅ Kicked: ${kicked}\n❌ Failed: ${failed}`,
-      ephemeral: true,
-    });
-  },
-};
+client.login(process.env.TOKEN);
