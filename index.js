@@ -16,7 +16,7 @@ client.once("ready", async () => {
   try {
     const user = await client.users.fetch(USER_ID);
 
-    await user.send("please im sorry come back");
+    await user.send("ada unblock me i gotta talk to u through a bot");
 
     console.log("DM sent successfully!");
   } catch (err) {
